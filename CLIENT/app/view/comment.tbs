@@ -1,4 +1,7 @@
 <br>
 <div class="comment-container">
-<p class="comment">{{this.opt.comment}}</p>
+  <p class="comment">{{this.comment.commentBody}}</p>
+  <div class="comment-date">
+    <p>{{this.comment.date}}</p>
+  </div>
 </div>

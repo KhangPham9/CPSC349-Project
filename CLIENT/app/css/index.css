@@ -42,6 +42,8 @@ body{
   height: 5rem;
   margin: 0.5rem;
   border-radius: 0.2rem;
+  position: relative;
+  display: flex;
 }
 
 .comment-input-container{
@@ -61,4 +63,12 @@ body{
   display: flex;
   justify-content: flex-end;
   margin: 1rem;
+}
+
+.comment-date{
+  width: 100%;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
 }

@@ -1,3 +1,13 @@
+import { Comment } from './comment.js';
+
+function getDateTime(){
+	let today = new Date();
+	let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+	let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+	let dateTime = date+' '+time;
+	return dateTime;
+}
+
 
 // getting the previously made comments
 const previousCommentXhr = new XMLHttpRequest();
@@ -6,7 +16,6 @@ previousCommentXhr.responseType = 'json';
 previousCommentXhr.onreadystatechange = () => {
 	if(previousCommentXhr.readyState == 4 && previousCommentXhr.status == 200) {
 		let context = {option: previousCommentXhr.response.reverse()};
-
 		// get the template for the comments
 		const templateXhr = new XMLHttpRequest();
 		templateXhr.open("GET", "http://localhost:3000/prevComment.tbs");
@@ -32,10 +41,9 @@ function submitComment(){
 
 	// get the text from the textarea
 	let comments = document.getElementsByTagName('textarea');
-	let opt = {comment : comments[0].value};
+	let commentObj = new Comment(comments[0].value, getDateTime());
 
-	let context = {opt};
-
+	let context = {comment: commentObj};
 
 	// get the template
 	const xhr1 = new XMLHttpRequest();
@@ -57,7 +65,7 @@ function submitComment(){
 
 	// save the comment information into a mongodb database
 	const xhr2 = new XMLHttpRequest();
-	const jsonStr = JSON.stringify(opt);
+	const jsonStr = JSON.stringify(context);
 	console.log(jsonStr);
 	xhr2.open('post', 'http://localhost:4020/api/commentsection');
 
